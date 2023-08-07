@@ -1,13 +1,13 @@
 ----------------------------------------------------------------------------------------------------------------------------------
 
-#Products currently in inventory.
+# Products currently in inventory.
   
 SELECT productCode, productName, quantityInStock
 FROM products;
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
-#Determine important factors that may influence inventory reorganization/reduction.
+# Determine important factors that may influence inventory reorganization/reduction.
   
 SELECT p.productCode, p.productName, p.quantityInStock, p.productLine, p.buyPrice, p.MSRP,
        w.warehouseName, w.warehousePctCap,
@@ -22,7 +22,7 @@ ORDER BY totalOrders DESC;
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
-#Where are items stored and could a warehouse be eliminated?
+# Where are items stored and could a warehouse be eliminated?
   
 SELECT w.warehouseName, COUNT(p.productCode) AS ProductCount, SUM(p.quantityInStock) AS TotalQuantity
 FROM products p
@@ -32,7 +32,7 @@ ORDER BY ProductCount;
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
-#Where are items stored and could a warehouse be eliminated?
+# Where are items stored and could a warehouse be eliminated?
   
 SELECT w.warehouseName, COUNT(p.productCode) AS ProductCount, SUM(p.quantityInStock) AS TotalQuantity
 FROM products p
@@ -42,7 +42,7 @@ ORDER BY ProductCount;
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
-#How are inventory numbers related to sales figures? Are inventory counts appropriate?
+# How are inventory numbers related to sales figures? Are inventory counts appropriate?
   
 SELECT p.productCode, p.productName, p.quantityInStock, SUM(od.quantityOrdered) AS TotalQuantityOrdered
 FROM products p
@@ -53,7 +53,7 @@ ORDER BY (p.quantityInStock - TotalQuantityOrdered);
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
-#Are we storing non-moving items? Are any items candidates for being dropped?
+# Are we storing non-moving items? Are any items candidates for being dropped?
   
 SELECT p.productCode, p.productName, p.quantityInStock, SUM(od.quantityOrdered) AS TotalQuantityOrdered
 FROM products p
